@@ -1,5 +1,3 @@
-const API_KEY = '504b85f6fe0a10a9c7f35945e14e7ddf';
-
 const requests = {
   fetchJwtToken: `/jwt-token`,
   fetchNetflixOriginals: ``,

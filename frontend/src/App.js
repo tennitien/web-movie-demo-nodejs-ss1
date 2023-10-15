@@ -32,16 +32,15 @@ function App() {
       }
       fetchData();
     }
-  }, []);
+  }, [token]);
   return (
     <BrowserRouter>
-      {token ? (
+      {console.log({ token })}
+      {token && (
         <Routes>
           <Route path='/' element={<Browse />} />
           <Route path='/search' element={<Search />} />
         </Routes>
-      ) : (
-        <p>Loading again</p>
       )}
     </BrowserRouter>
   );
