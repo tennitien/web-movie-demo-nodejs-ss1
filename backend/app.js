@@ -14,8 +14,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-// 9. Add authentication mechanism by Middleware
-app.use(postToken);
 
 // route movie
 app.use('/api/movies', movieRouter);

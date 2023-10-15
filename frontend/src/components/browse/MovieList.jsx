@@ -18,8 +18,6 @@ function MovieList({ title, fetchUrl, isLargeRow }) {
       setMovies(request.data.results);
       return request;
     }
-    const token = document.cookie;
-    console.log('token:', token);
     fetchData();
   }, [fetchUrl]);
 
