@@ -6,8 +6,12 @@ const usersToken = JSON.parse(fs.readFileSync('./data/userToken.json', 'utf8'));
 
 exports.postToken = (req, res, next) => {
   const user = usersToken[1];
+  const cookieOptions= {
+    
+  }
   const token = jwt.sign({ user }, process.env.SECRET_TOKEN);
-  res.cookie('token', token, { httpOnly: true });
+  // res.cookie('token', token, { httpOnly: true });
+  // res.
   next();
 };
 
@@ -21,6 +25,7 @@ exports.authenticateToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: 'Forbidden' });
     }
+    console.log(user);
     const getUser = user.user;
     const foundUser = usersToken.find(
       u => u.userId === getUser.userId && u.token === getUser.token

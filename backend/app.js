@@ -4,18 +4,18 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
 const port = 8000;
+dotenv.config();
 
 const movieRouter = require('./routes/movie');
 const { postToken } = require('./middleware/authenticateToken');
 
 // Middleware
-dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-// set cookie
-app.get('/', postToken);
+// 9. Add authentication mechanism by Middleware
+app.use(postToken);
 
 // route movie
 app.use('/api/movies', movieRouter);
