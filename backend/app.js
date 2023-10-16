@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-
 // route movie
 app.use('/api/movies', movieRouter);
 

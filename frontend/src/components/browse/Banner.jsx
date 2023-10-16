@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
+import Cookies from 'js-cookie';
 import './Banner.css';
 
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const token = Cookies.get('token');
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const request = await axios.get(requests.fetchNetflixOriginals);
+        const request = await axios.get(requests.fetchNetflixOriginals, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setMovie(
           request.data.results[
             Math.floor(Math.random() * request.data.results.length - 1)
@@ -21,7 +27,9 @@ function Banner() {
         console.log('Banner-error:', error);
       }
     }
-    fetchData();
+    if (token) {
+      fetchData();
+    }
   }, []);
 
   function truncate(str, n) {

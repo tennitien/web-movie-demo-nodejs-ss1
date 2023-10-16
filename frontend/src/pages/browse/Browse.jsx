@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import MovieList from '../../components/browse/MovieList';
 import requests from '../../utils/requests';
 import Banner from '../../components/browse/Banner';
 import Nav from '../../components/browse/Nav';
+
 import './Browse.css';
 
 function Browse() {
@@ -26,7 +27,6 @@ function Browse() {
         title='Tài liệu'
         fetchUrl={requests.fetchDocumentaries()}
       />{' '}
-   
     </div>
   );
 }

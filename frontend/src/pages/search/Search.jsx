@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import Nav from '../../components/browse/Nav';
 import SearchResult from '../../components/search/SearchResult';
-import './Search.css';
 import { useNavigate } from 'react-router-dom';
+
+import './Search.css';
 
 const Search = () => {
   const [query, setQuery] = useState('');

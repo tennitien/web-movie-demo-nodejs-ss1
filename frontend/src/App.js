@@ -10,35 +10,32 @@ import requests from './utils/requests';
 import Cookies from 'js-cookie';
 
 function App() {
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    const getToken = Cookies.get('token');
-    if (getToken) {
-      setToken(getToken);
-    } else {
-      async function fetchData() {
-        try {
-          const response = await axios.get(requests.fetchJwtToken);
-          const newToken = response.data.token;
-          if (newToken) {
-            // Lưu token vào cookie và state
-            Cookies.set('token', newToken);
-            setToken(newToken);
-          }
-        } catch (error) {
-          console.error('Error fetching token:', error);
-        }
+  async function fetchData() {
+    try {
+      const response = await axios.get(requests.fetchJwtToken);
+      const newToken = response.data.token;
+      if (newToken) {
+        // Lưu token vào cookie và state
+        Cookies.set('token', newToken);
+        setToken(newToken);
       }
-      fetchData();
+    } catch (error) {
+      console.error('Error fetching token:', error);
     }
-  }, [token]);
+  }
+  const getToken = Cookies.get('token');
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    if (!getToken) {
+      fetchData();
+    } else setToken(getToken);
+  }, [getToken]);
+
   return (
     <BrowserRouter>
-      {console.log({ token })}
       {token && (
         <Routes>
-          <Route path='/' element={<Browse />} />
+          <Route path='/' element={<Browse  />} />
           <Route path='/search' element={<Search />} />
         </Routes>
       )}
